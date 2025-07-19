@@ -1,6 +1,13 @@
+import React from 'react';
+import { Suspense } from 'react';
+const Spline = React.lazy(() => import('@splinetool/react-spline'));
+
 const HeroSection = () => {
 return (
-    <div className="w-full h-screen relative">
+    <div className="w-full h-screen fixed top-0 left-0 z-10">
+        <Suspense fallback={<div>Loading...</div>}>
+            <Spline scene="https://prod.spline.design/gmcYUMETn8KodfFJ/scene.splinecode" />
+        </Suspense>
         <div className="absolute top-0 left-0 w-full h-full bg-black/20 flex justify-between">
             <div className="imgs w-1/2 h-full relative">
                     <img src="/hero-base.png" alt=""  className="absolute left-0 bottom-0 w-full h-full object-cover z-10"/>

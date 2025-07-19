@@ -1,0 +1,7 @@
+@import "tailwindcss";
+@import 'remixicon/fonts/remixicon.css';
+
+@font-face {
+    font-family: "Majestic";
+    src: url("/fonts/Majestic-Romance.ttf");
+}

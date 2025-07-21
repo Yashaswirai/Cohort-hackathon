@@ -1,9 +1,10 @@
 import NavBar from "./Components/NavBar.jsx";
 import MainRoute from "./Routes/MainRoute.jsx";
-
+import Loader from "./Components/Loader.jsx";
 const App = () => {
   return (
-    <div className="w-full h-screen fixed top-0 left-0 bg-[url('background.png')] bg-cover bg-center overflow-x-auto">
+    <div className="w-full h-screen">
+      <Loader />
       <NavBar />
       <MainRoute />
     </div>

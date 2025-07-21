@@ -1,8 +1,29 @@
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { use } from "react";
 import { Link, NavLink } from "react-router-dom";
 
 const NavBar = () => {
+  useGSAP(() => {
+    let nav = document.querySelector("nav");
+    document.addEventListener("wheel", function (e) {
+      if (e.wheelDelta >= 0) {
+        gsap.to(nav, {
+          y: "0",
+          duration: 0.5,
+          ease: "power2.out",
+        });
+      } else {
+        gsap.to(nav, {
+          y: "-100%",
+          duration: 0.5,
+          ease: "power2.out",
+        });
+      }
+    });
+  });
   return (
-    <nav className="w-full px-8 py-3 fixed top-0 left-0 flex justify-between items-center z-50 ">
+    <nav className="w-full px-8 py-3 fixed top-0 left-0 flex justify-between items-center z-50 bg-transparent">
       <Link to="/" className="flex items-center gap-2">
         <img
           src="https://www.rosierfoods.com/cdn/shop/files/logo_1_1_bb8fb2d6-681f-4ca4-aad5-5dbc7e581ce4.png?v=1743060161&width=135"

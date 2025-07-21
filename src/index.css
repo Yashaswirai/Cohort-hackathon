@@ -5,3 +5,11 @@
     font-family: "Majestic";
     src: url("/fonts/Majestic-Romance.ttf");
 }
+@font-face {
+    font-family: "abrikos";
+    src: url("/fonts/abrikosDEMO.otf");
+}
+@font-face {
+    font-family: "satoshi";
+    src: url("/fonts/Satoshi-Regular.otf");
+}

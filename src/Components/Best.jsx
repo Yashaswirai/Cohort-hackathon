@@ -97,7 +97,7 @@ const Best = () => {
           spaceBetween={30}
           loop={true}
           autoplay={{
-            delay: 1500,
+            delay: 800,
           }}
           pagination={{
             clickable: true,

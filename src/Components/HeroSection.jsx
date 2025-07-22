@@ -22,11 +22,12 @@ const HeroSection = () => {
     tl.from(
       tagLine,
       {
-        delay: 1.5,
+        delay: 2,
         duration: 1,
         opacity: 0,
         y: 50,
         ease: "power2.out",
+        stagger: 0.2, 
       },
       "-=0.5"
     ).from(
@@ -41,7 +42,7 @@ const HeroSection = () => {
     );
   });
   return (
-    <div data-scroll data-scroll-section data-scroll-speed="-6" className="hero w-full h-screen relative bg-[url('/background.png')] bg-cover bg-center overflow-hidden">
+    <div className="hero w-full h-screen relative bg-[url('/background.png')] bg-cover bg-center overflow-hidden">
       <Suspense fallback={<div>Loading...</div>}>
         <Spline
           scene="https://prod.spline.design/gmcYUMETn8KodfFJ/scene.splinecode"
@@ -66,7 +67,7 @@ const HeroSection = () => {
             When people choose love and purity, they choose Rosier.
           </h4>
           <p className="text-2xl font-bold bg-[#D7A72F] text-[#743506] p-4 rounded-full">
-            Slow, Pure, Remembered.
+            <span>Slow,</span> <span>Pure,</span> <span>Remembered.</span>
           </p>
         </div>
       </div>

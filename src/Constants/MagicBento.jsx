@@ -1,6 +1,7 @@
 import { useRef, useEffect, useState, useCallback } from "react";
 import { gsap } from "gsap";
 import { Link } from "react-router-dom";
+import { useGSAP } from "@gsap/react";
 
 const DEFAULT_PARTICLE_COUNT = 12;
 const DEFAULT_SPOTLIGHT_RADIUS = 300;
@@ -10,35 +11,31 @@ const MOBILE_BREAKPOINT = 768;
 const cardData = [
   {
     title: "GHEE",
-    img:"https://www.rosierfoods.com/cdn/shop/files/Untitled_Artwork64.jpg?v=1749285565&width=823",
+    img: "https://www.rosierfoods.com/cdn/shop/files/Untitled_Artwork64.jpg?v=1749285565&width=823",
   },
   {
     title: "KHAPLI ATTA",
-    img:"https://www.rosierfoods.com/cdn/shop/files/Bestseller.jpg?v=1743589042&width=823",
+    img: "https://www.rosierfoods.com/cdn/shop/files/Bestseller.jpg?v=1743589042&width=823",
   },
   {
     title: "STONE PRESSED OIL",
-    img:"https://www.rosierfoods.com/cdn/shop/files/2_c64d1cf8-55d0-41fa-83a3-130a0c84f191.jpg?v=1746737616&width=823",
+    img: "https://www.rosierfoods.com/cdn/shop/files/2_c64d1cf8-55d0-41fa-83a3-130a0c84f191.jpg?v=1746737616&width=823",
   },
   {
     title: "PUJA ESSENTIALS",
-    img:"https://www.rosierfoods.com/cdn/shop/files/BakhoorCupFront.jpg?v=1743151438&width=823",
+    img: "https://www.rosierfoods.com/cdn/shop/files/BakhoorCupFront.jpg?v=1743151438&width=823",
   },
   {
     title: "BUILD YOUR OWN BOX",
-    img:"https://cdn.shopify.com/s/files/1/0653/2605/5654/files/7_Berry_Coconut.jpg?v=1743769781",
+    img: "https://cdn.shopify.com/s/files/1/0653/2605/5654/files/7_Berry_Coconut.jpg?v=1743769781",
   },
   {
     title: "ESSENTIALS PACK",
-    img:"https://www.rosierfoods.com/cdn/shop/files/kitchen_pack.jpg?v=1750338216&width=823",
+    img: "https://www.rosierfoods.com/cdn/shop/files/kitchen_pack.jpg?v=1750338216&width=823",
   },
 ];
 
-const createParticleElement = (
-  x,
-  y,
-  color = DEFAULT_GLOW_COLOR
-) => {
+const createParticleElement = (x, y, color = DEFAULT_GLOW_COLOR) => {
   const el = document.createElement("div");
   el.className = "particle";
   el.style.cssText = `
@@ -61,13 +58,7 @@ const calculateSpotlightValues = (radius) => ({
   fadeDistance: radius * 0.75,
 });
 
-const updateCardGlowProperties = (
-  card,
-  mouseX,
-  mouseY,
-  glow,
-  radius
-) => {
+const updateCardGlowProperties = (card, mouseX, mouseY, glow, radius) => {
   const rect = card.getBoundingClientRect();
   const relativeX = ((mouseX - rect.left) / rect.width) * 100;
   const relativeY = ((mouseY - rect.top) / rect.height) * 100;
@@ -439,8 +430,8 @@ const GlobalSpotlight = ({
         minDistance <= proximity
           ? 0.8
           : minDistance <= fadeDistance
-            ? ((fadeDistance - minDistance) / (fadeDistance - proximity)) * 0.8
-            : 0;
+          ? ((fadeDistance - minDistance) / (fadeDistance - proximity)) * 0.8
+          : 0;
 
       gsap.to(spotlightRef.current, {
         opacity: targetOpacity,
@@ -519,6 +510,24 @@ const MagicBento = ({
   const isMobile = useMobileDetection();
   const shouldDisableAnimations = disableAnimations || isMobile;
 
+  useGSAP(() => {
+    const cards = document.querySelectorAll(".card");
+    cards.forEach((card) => {
+      gsap.from(card, {
+        scrollTrigger: {
+          trigger: card,
+          start: "top 95%",
+          end: "bottom 100%",
+          scrub: true,
+          // markers: true
+        },
+        opacity: 0,
+        // y: 50,
+        duration: 1,
+        ease: "power2.inOut",
+      });
+    });
+  });
   return (
     <>
       <style>
@@ -709,7 +718,9 @@ const MagicBento = ({
       <BentoCardGrid gridRef={gridRef}>
         <div className="card-responsive w-full h-full">
           {cardData.map((card, index) => {
-            const baseClassName = `card ${enableBorderGlow ? "card--border-glow" : ""}`;
+            const baseClassName = `card ${
+              enableBorderGlow ? "card--border-glow" : ""
+            }`;
 
             const cardStyle = {
               backgroundColor: card.color || "var(--background-dark)",
@@ -723,20 +734,20 @@ const MagicBento = ({
 
             const cardContent = (
               <>
-                <img 
-                  src={card.img} 
-                  alt={card.title}
-                  className="card__image"
-                />
-                <h3 className="card__title">
-                  {card.title}
-                </h3>
+                <img src={card.img} alt={card.title} className="card__image" />
+                <h3 className="card__title">{card.title}</h3>
               </>
             );
 
             if (enableStars) {
               return (
-                <Link key={index} to={`/collection/${card.title.toLowerCase().split(" ").join("-")}`}>
+                <Link
+                  key={index}
+                  to={`/collection/${card.title
+                    .toLowerCase()
+                    .split(" ")
+                    .join("-")}`}
+                >
                   <ParticleCard
                     className={baseClassName}
                     style={cardStyle}
@@ -754,7 +765,13 @@ const MagicBento = ({
             }
 
             return (
-              <Link key={index} to={`/collection/${card.title.toLowerCase().split(" ").join("-")}`}>
+              <Link
+                key={index}
+                to={`/collection/${card.title
+                  .toLowerCase()
+                  .split(" ")
+                  .join("-")}`}
+              >
                 <div
                   className={baseClassName}
                   style={cardStyle}

@@ -41,7 +41,7 @@ const HeroSection = () => {
     );
   });
   return (
-    <div className="hero w-full h-screen relative bg-[url('/background.png')] bg-cover bg-center overflow-hidden">
+    <div data-scroll data-scroll-section data-scroll-speed="-6" className="hero w-full h-screen relative bg-[url('/background.png')] bg-cover bg-center overflow-hidden">
       <Suspense fallback={<div>Loading...</div>}>
         <Spline
           scene="https://prod.spline.design/gmcYUMETn8KodfFJ/scene.splinecode"

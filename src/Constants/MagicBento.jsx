@@ -476,15 +476,14 @@ const GlobalSpotlight = ({
   return null;
 };
 
-const BentoCardGrid = ({ children, gridRef, req }) => (
-  <Link
-    to={req}
-    className="bento-section grid gap-2 p-3 max-w-[54rem] select-none relative"
+const BentoCardGrid = ({ children, gridRef }) => (
+  <div
+    className="bento-section grid gap-2 p-3  select-none relative"
     style={{ fontSize: "clamp(1rem, 0.9rem + 0.5vw, 1.5rem)" }}
     ref={gridRef}
   >
     {children}
-  </Link>
+  </div>
 );
 
 const useMobileDetection = () => {
@@ -708,7 +707,7 @@ const MagicBento = ({
       )}
 
       <BentoCardGrid gridRef={gridRef}>
-        <div className="card-responsive">
+        <div className="card-responsive w-full h-full">
           {cardData.map((card, index) => {
             const baseClassName = `card ${enableBorderGlow ? "card--border-glow" : ""}`;
 
@@ -755,7 +754,7 @@ const MagicBento = ({
             }
 
             return (
-              <Link key={index} to={`/collection/${card.title.toLowerCase()}`}>
+              <Link key={index} to={`/collection/${card.title.toLowerCase().split(" ").join("-")}`}>
                 <div
                   className={baseClassName}
                   style={cardStyle}

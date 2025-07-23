@@ -195,7 +195,7 @@ const OurStory = () => {
               <img
                 src="https://www.rosierfoods.com/cdn/shop/files/Rosier_Starter_Pack.jpg?v=1750344468&width=823"
                 alt="Our Products"
-                className="w-full h-80 object-cover object-bottom rounded-2xl shadow-2xl"
+                className="w-full h-80 object-cover object-bottom rounded-2xl shadow-2xl mb-12"
               />
             </div>
           </div>

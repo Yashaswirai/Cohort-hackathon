@@ -149,7 +149,7 @@ const Best = () => {
           {allItems.map((item, index) => (
             <SwiperSlide key={index}>
               <div className="item text-white bg-gray-900 bg-opacity-50 border border-gray-800 hover:border-yellow-500 p-4 sm:p-6 rounded-2xl shadow-lg">
-                <div className="relative overflow-hidden rounded-xl mb-4">
+                <div className="relative overflow-hidden rounded-xl mb-2">
                   <img
                     src={item.img}
                     alt={item.title}
@@ -157,8 +157,8 @@ const Best = () => {
                   />
                 </div>
 
-                <div className="space-y-3">
-                  <h2 className="text-lg sm:text-xl font-semibold h-12 sm:h-14 overflow-hidden">
+                <div>
+                  <h2 className="text-lg sm:text-xl font-semibold pb-1 overflow-hidden">
                     {item.title}
                   </h2>
                   <div className="flex justify-between items-center">
@@ -171,11 +171,12 @@ const Best = () => {
                   </div>
 
                   <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 pt-2">
-                    <button
-                      className="flex-1 bg-yellow-600 hover:bg-yellow-700 text-yellow-100 px-3 sm:px-4 py-2 rounded-full font-semibold text-center text-sm sm:text-base transition-colors duration-200"
+                    <Link
+                      to="/cart"
+                      className="flex items-center justify-center px-2 bg-yellow-600 hover:bg-yellow-700 text-yellow-100 rounded-full font-semibold text-center text-sm sm:text-base transition-colors duration-200"
                     >
                       Add to Cart
-                    </button>
+                    </Link>
                     <Link
                       to="/shop"
                       className="flex-1 border border-yellow-500 hover:bg-yellow-500 hover:text-black text-yellow-500 px-3 sm:px-4 py-2 rounded-full font-semibold text-center text-sm sm:text-base transition-all duration-200"

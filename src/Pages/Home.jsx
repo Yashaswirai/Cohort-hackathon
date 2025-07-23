@@ -2,16 +2,15 @@ import HeroSection from "../Components/HeroSection";
 import Best from "../Components/Best";
 import Category from "../Components/Category";
 import WhyRosier from "../Components/WhyRosier";
-import Note from "../Components/Note";
-
+import Footer from "../Components/Footer";
 const Home = () => {
   return (
-    <div className="w-full bg-black">
+    <div className="w-full bg-black overflow-x-hidden">
       <HeroSection />
       <Best />
       <Category />
       <WhyRosier />
-      <Note/>
+      <Footer />
     </div>
   );
 };

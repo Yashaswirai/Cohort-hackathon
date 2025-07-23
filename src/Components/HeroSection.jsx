@@ -1,13 +1,14 @@
 import { useGSAP } from "@gsap/react";
-import React from "react";
+import React, { useRef } from "react";
 import { Suspense } from "react";
 const Spline = React.lazy(() => import("@splinetool/react-spline"));
 import gsap from "gsap";
 
 const HeroSection = () => {
+  const paraRef = useRef(null);
+
   useGSAP(() => {
     const hero = document.querySelector(".hero");
-    const tagLine = document.querySelector(".tagLine");
     const imgs = document.querySelector(".imgs");
 
     hero.addEventListener(
@@ -20,20 +21,8 @@ const HeroSection = () => {
       },
       []
     );
-
     const tl = gsap.timeline();
     tl.from(
-      tagLine,
-      {
-        delay: 2,
-        duration: 1,
-        opacity: 0,
-        y: 50,
-        ease: "power2.out",
-        stagger: 0.2,
-      },
-      "-=0.5"
-    ).from(
       imgs,
       {
         duration: 1,
@@ -43,10 +32,31 @@ const HeroSection = () => {
       },
       "-=0.5"
     );
-  });
-
+    gsap.from(".tagLine h4", {
+      duration: 1.2,
+      opacity: 0,
+      y: 50,
+      ease: "power2.out",
+      stagger: 0.2,
+    });
+    gsap.from(paraRef.current, {
+      delay: 1.5,
+      duration: 0.8,
+      opacity: 0,
+      y: 50,
+      ease: "power2.out",
+    });
+    gsap.from(".tagline-span", {
+      delay: 2,
+      duration: 0.6,
+      opacity: 0,
+      y: 20,
+      ease: "back.out(1.7)",
+      stagger: 0.2,
+    });
+  }, []);
   return (
-    <div className="hero w-full min-h-screen relative bg-[url('/background.png')] bg-cover bg-center overflow-hidden">
+    <div className="hero w-full h-screen relative bg-[url('/background.png')] bg-cover bg-center overflow-hidden">
       {/* 3D Background */}
       <Suspense
         fallback={
@@ -81,8 +91,13 @@ const HeroSection = () => {
             When people choose love and purity, they choose Rosier.
           </h4>
           <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4">
-            <p className="text-lg sm:text-xl lg:text-2xl font-bold bg-[#D7A72F] text-[#743506] px-4 py-2 sm:px-6 sm:py-3 lg:px-8 lg:py-4 rounded-full text-center">
-              <span>Slow,</span> <span>Pure,</span> <span>Remembered.</span>
+            <p
+              ref={paraRef}
+              className="text-lg sm:text-xl lg:text-2xl font-bold bg-[#D7A72F] text-[#743506] px-4 py-2 sm:px-6 sm:py-3 lg:px-8 lg:py-4 rounded-full text-center"
+            >
+              <span className="tagline-span">Slow,</span>{" "}
+              <span className="tagline-span">Pure,</span>{" "}
+              <span className="tagline-span">Remembered.</span>
             </p>
           </div>
         </div>

@@ -1,0 +1,227 @@
+import { useEffect, useRef, useState } from "react";
+import Footer from "../Components/Footer";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+
+const OurStory = () => {
+  const containerRef = useRef(null);
+  const [currentSection, setCurrentSection] = useState(0);
+  const [isInnerScrollComplete, setIsInnerScrollComplete] = useState(false);
+  const totalSections = 2;
+
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    let isScrolling = false;
+
+    const handleWheel = (e) => {
+      if (isScrolling) return;
+
+      e.preventDefault();
+      isScrolling = true;
+
+      const isScrollingDown = e.deltaY > 0;
+      const isScrollingUp = e.deltaY < 0;
+
+      if (!isInnerScrollComplete) {
+        if (isScrollingDown && currentSection < totalSections - 1) {
+          setCurrentSection((prev) => prev + 1);
+          if (currentSection + 1 === totalSections - 1) {
+            setIsInnerScrollComplete(true);
+          }
+        } else if (isScrollingUp && currentSection > 0) {
+          setCurrentSection((prev) => prev - 1);
+        } else if (isScrollingDown && currentSection === totalSections - 1) {
+          setIsInnerScrollComplete(true);
+          window.scrollBy(0, e.deltaY);
+        }
+      } else {
+        if (isScrollingUp) {
+          const windowScrollTop =
+            window.pageYOffset || document.documentElement.scrollTop;
+          if (windowScrollTop <= container.offsetTop) {
+            setIsInnerScrollComplete(false);
+            setCurrentSection(totalSections - 1);
+          } else {
+            window.scrollBy(0, e.deltaY);
+          }
+        } else {
+          window.scrollBy(0, e.deltaY);
+        }
+      }
+
+      setTimeout(() => {
+        isScrolling = false;
+      }, 800);
+    };
+
+    container.addEventListener("wheel", handleWheel, { passive: false });
+
+    return () => {
+      container.removeEventListener("wheel", handleWheel);
+    };
+  }, [currentSection, isInnerScrollComplete, totalSections]);
+  useGSAP(() => {
+    const cards = document.querySelectorAll(".card");
+    cards.forEach((card) => {
+      gsap.from(card, {
+        opacity: 0,
+        y: 50,
+        duration: 0.8,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: card,
+          start: "top 80%",
+          toggleActions: "play none none reverse",
+        },
+      });
+    });
+  });
+  return (
+    <>
+      <div
+        ref={containerRef}
+        className="w-full h-screen overflow-hidden relative bg-[url('https://www.rosierfoods.com/cdn/shop/files/78d4352e-c58a-4169-956d-bc09beaec595.jpg?v=1743061791')] bg-cover bg-center"
+      >
+        <div
+          className="w-full h-full transition-transform duration-800 ease-in-out"
+          style={{
+            transform: `translateY(-${currentSection * 100}vh)`,
+          }}
+        >
+          <div className="component w-full h-screen flex items-center justify-center relative">
+            <div className="absolute inset-0 bg-black/50"></div>
+            <div className="relative z-10 text-center px-8 max-w-4xl mx-auto">
+              <h1 className="text-white text-4xl sm:text-5xl lg:text-6xl font-bold mb-6">
+                Our Story
+              </h1>
+              <p className="text-white/90 text-lg sm:text-xl lg:text-2xl leading-relaxed">
+                Born from tradition, crafted with love. Discover how Rosier
+                began its journey to bring you the purest, most authentic food
+                experiences.
+              </p>
+              <small className="text-white/70 text-md">We at Rosier believe in reviving the old traditional ways of Bharat.</small>
+              <div className="mt-8 text-white/70 text-sm">
+                <p>Scroll down to continue</p>
+                <div className="animate-bounce mt-2">↓</div>
+              </div>
+            </div>
+          </div>
+
+          <div className="component w-full h-screen flex items-center justify-center relative bg-gradient-to-br from-amber-900/80 to-black/80">
+            <div className="relative z-10 text-center px-8 max-w-4xl mx-auto">
+              <h2 className="text-white text-3xl sm:text-4xl lg:text-5xl font-bold mb-6">
+                Our Values
+              </h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-white/90">
+                <div className="space-y-4">
+                  <h3 className="text-xl font-semibold text-amber-300">
+                    Purity
+                  </h3>
+                  <p className="text-base leading-relaxed">
+                    We believe in keeping things simple and pure, just as nature
+                    intended.
+                  </p>
+                </div>
+                <div className="space-y-4">
+                  <h3 className="text-xl font-semibold text-amber-300">
+                    Tradition
+                  </h3>
+                  <p className="text-base leading-relaxed">
+                    Our methods are rooted in time-tested traditions passed down
+                    through generations.
+                  </p>
+                </div>
+                <div className="space-y-4">
+                  <h3 className="text-xl font-semibold text-amber-300">
+                    Quality
+                  </h3>
+                  <p className="text-base leading-relaxed">
+                    Every product is crafted with meticulous attention to detail
+                    and quality.
+                  </p>
+                </div>
+                <div className="space-y-4">
+                  <h3 className="text-xl font-semibold text-amber-300">Love</h3>
+                  <p className="text-base leading-relaxed">
+                    Love is the secret ingredient in everything we create for
+                    your family.
+                  </p>
+                </div>
+              </div>
+              <div className="mt-8 text-white/70 text-sm">
+                <p>Continue scrolling to explore more</p>
+                <div className="animate-bounce mt-2">↓</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="absolute right-6 top-1/2 transform -translate-y-1/2 z-20 space-y-3">
+          {Array.from({ length: totalSections }).map((_, index) => (
+            <div
+              key={index}
+              className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                currentSection === index
+                  ? "bg-amber-300 scale-125"
+                  : "bg-white/50 hover:bg-white/80"
+              }`}
+              onClick={() => setCurrentSection(index)}
+            />
+          ))}
+        </div>
+      </div>
+
+      <div className="w-full min-h-screen bg-black text-white">
+        <div className="max-w-6xl mx-auto px-8 py-16">
+          <h2 className="text-4xl font-bold mb-8 text-center">
+            Our Journey Continues
+          </h2>
+          <div className="card grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div className="space-y-6">
+              <p className="text-lg leading-relaxed text-gray-300">
+                From our humble beginnings to becoming a trusted name in
+                authentic food products, our journey has been guided by
+                unwavering commitment to quality and tradition.
+              </p>
+              <p className="text-lg leading-relaxed text-gray-300">
+                Today, we continue to honor our heritage while embracing
+                innovation to serve families across the globe with products that
+                nourish both body and soul.
+              </p>
+            </div>
+            <div className="relative">
+              <img
+                src="https://www.rosierfoods.com/cdn/shop/files/Rosier_Starter_Pack.jpg?v=1750344468&width=823"
+                alt="Our Products"
+                className="w-full h-80 object-cover object-bottom rounded-2xl shadow-2xl"
+              />
+            </div>
+          </div>
+          <div className="card grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div className="relative">
+              <img
+                src="https://www.rosierfoods.com/cdn/shop/articles/WhatsApp_Image_2023-07-09_at_12.18.57_PM.jpg?v=1712256951"
+                alt="Our Products"
+                className="w-full h-80 object-cover object-center rounded-2xl shadow-2xl"
+              />
+            </div>
+            <div className="space-y-6">
+              <p className="text-lg leading-relaxed text-gray-300">
+                In our daily life routine, we sometimes forget to take stock of what we are eating and how we are eating. The choices we make with respect to food which affects us and our entire family. So, we must consciously invest energy in finding right kinds of foods for us and our family to help build their immunity.
+              </p>
+              <p className="text-lg leading-relaxed text-gray-300">
+                At Rosier, we believe in reviving the old traditional ways of Bharat. We are committed to bringing you the purest, most authentic food experiences that nourish both body and soul.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <Footer />
+    </>
+  );
+};
+
+export default OurStory;

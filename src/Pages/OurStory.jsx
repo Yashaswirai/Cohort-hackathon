@@ -2,66 +2,22 @@ import { useEffect, useRef, useState } from "react";
 import Footer from "../Components/Footer";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-
+import { TypewriterEffectSmooth } from "../Constants/TypeWritterEffect";
+import { text } from "motion/react-client";
 const OurStory = () => {
   const containerRef = useRef(null);
-  const [currentSection, setCurrentSection] = useState(0);
-  const [isInnerScrollComplete, setIsInnerScrollComplete] = useState(false);
-  const totalSections = 2;
-
-  useEffect(() => {
-    const container = containerRef.current;
-    if (!container) return;
-
-    let isScrolling = false;
-
-    const handleWheel = (e) => {
-      if (isScrolling) return;
-
-      e.preventDefault();
-      isScrolling = true;
-
-      const isScrollingDown = e.deltaY > 0;
-      const isScrollingUp = e.deltaY < 0;
-
-      if (!isInnerScrollComplete) {
-        if (isScrollingDown && currentSection < totalSections - 1) {
-          setCurrentSection((prev) => prev + 1);
-          if (currentSection + 1 === totalSections - 1) {
-            setIsInnerScrollComplete(true);
-          }
-        } else if (isScrollingUp && currentSection > 0) {
-          setCurrentSection((prev) => prev - 1);
-        } else if (isScrollingDown && currentSection === totalSections - 1) {
-          setIsInnerScrollComplete(true);
-          window.scrollBy(0, e.deltaY);
-        }
-      } else {
-        if (isScrollingUp) {
-          const windowScrollTop =
-            window.pageYOffset || document.documentElement.scrollTop;
-          if (windowScrollTop <= container.offsetTop) {
-            setIsInnerScrollComplete(false);
-            setCurrentSection(totalSections - 1);
-          } else {
-            window.scrollBy(0, e.deltaY);
-          }
-        } else {
-          window.scrollBy(0, e.deltaY);
-        }
-      }
-
-      setTimeout(() => {
-        isScrolling = false;
-      }, 800);
-    };
-
-    container.addEventListener("wheel", handleWheel, { passive: false });
-
-    return () => {
-      container.removeEventListener("wheel", handleWheel);
-    };
-  }, [currentSection, isInnerScrollComplete, totalSections]);
+  useGSAP(() => {
+    gsap.to(".component", {
+      scrollTrigger: {
+        trigger: containerRef.current,
+        start: "top top",
+        pin: true,
+        scrub: 1,
+      },
+      y:"-100%",
+      ease: "none",
+    })
+  });
   useGSAP(() => {
     const cards = document.querySelectorAll(".card");
     cards.forEach((card) => {
@@ -85,10 +41,7 @@ const OurStory = () => {
         className="w-full h-screen overflow-hidden relative bg-[url('https://www.rosierfoods.com/cdn/shop/files/78d4352e-c58a-4169-956d-bc09beaec595.jpg?v=1743061791')] bg-cover bg-center"
       >
         <div
-          className="w-full h-full transition-transform duration-800 ease-in-out"
-          style={{
-            transform: `translateY(-${currentSection * 100}vh)`,
-          }}
+          className="w-full h-full"
         >
           <div className="component w-full h-screen flex items-center justify-center relative">
             <div className="absolute inset-0 bg-black/50"></div>
@@ -157,27 +110,14 @@ const OurStory = () => {
             </div>
           </div>
         </div>
-
-        <div className="absolute right-6 top-1/2 transform -translate-y-1/2 z-20 space-y-3">
-          {Array.from({ length: totalSections }).map((_, index) => (
-            <div
-              key={index}
-              className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                currentSection === index
-                  ? "bg-amber-300 scale-125"
-                  : "bg-white/50 hover:bg-white/80"
-              }`}
-              onClick={() => setCurrentSection(index)}
-            />
-          ))}
-        </div>
       </div>
 
       <div className="w-full min-h-screen bg-black text-white">
         <div className="max-w-6xl mx-auto px-8 py-16">
-          <h2 className="text-4xl font-bold mb-8 text-center">
-            Our Journey Continues
-          </h2>
+          <div className="w-full flex justify-center">
+
+            <TypewriterEffectSmooth words={[{text:"Our"},{text:"Journey"},{text:"Continues",className:"text-amber-500 dark:text-amber-500"}]}/>
+          </div>
           <div className="card grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div className="space-y-6">
               <p className="text-lg leading-relaxed text-gray-300">

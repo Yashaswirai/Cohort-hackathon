@@ -6,13 +6,13 @@ import Footer from "../Components/Footer";
 const shop = () => {
   const words = [
     {
-      text: "Choose ",
+      text: "Choose",
     },
     {
-      text: "From ",
+      text: "From",
     },
     {
-      text: "Our ",
+      text: "Our",
     },
     {
       text: "Collections.",

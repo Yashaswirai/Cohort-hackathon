@@ -33,7 +33,7 @@ const NavBar = () => {
     { to: "/", label: "Home" },
     { to: "/ourStory", label: "Our Story" },
     { to: "/shop", label: "Shop" },
-    { to: "/comunity", label: "Community" },
+    { to: "/community", label: "Community" },
     { to: "/contactUs", label: "Contact us" },
   ];
 

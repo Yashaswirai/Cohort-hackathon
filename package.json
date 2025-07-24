@@ -20,6 +20,7 @@
     "motion": "^12.23.6",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
+    "react-hook-form": "^7.61.0",
     "react-router-dom": "^7.7.0",
     "remixicon": "^4.6.0",
     "swiper": "^11.2.10",

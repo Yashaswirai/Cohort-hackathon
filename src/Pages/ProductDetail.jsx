@@ -184,7 +184,35 @@ const ProductDetail = () => {
       inStock: true,
       rating: 4.5,
       reviews: 75
-    }
+    },
+    'essentials-pack': {
+      id: 'essentials-pack',
+      name: 'Essential Kitchen Pack',
+      price: 2616,
+      originalPrice: 2798,
+      images: [
+        'https://www.rosierfoods.com/cdn/shop/files/kitchen_pack.jpg?v=1750338216',
+        'https://www.rosierfoods.com/cdn/shop/files/kitchen_pack.jpg?v=1750338216',
+        'https://www.rosierfoods.com/cdn/shop/files/Untitled_Artwork60_2789b614-2cf4-4f15-b0f0-da4521ae6b39.jpg?v=1753355631',
+        'https://www.rosierfoods.com/cdn/shop/files/81zHR0l51XL._SL1500.jpg?v=1750338216',
+        'https://www.rosierfoods.com/cdn/shop/files/Black_Mustard_Oil_2.jpg?v=1750338216'
+      ],
+      description: 'The Essential Kitchen Pack is a curated collection of premium, organic staples designed to elevate your culinary experience. This pack includes our signature Premium A2 Ghee, Khapli Atta (Emmer Wheat Flour), Stone Pressed Mustard Oil, and Wild Forest Honey, all sourced from sustainable farms and crafted with care. Perfect for health-conscious individuals and families, this pack offers a wholesome foundation for nutritious meals and snacks.',
+      features: [
+        'Premium A2 Ghee',
+        'Khapli Atta (Emmer Wheat Flour)',
+        'Stone Pressed Mustard Oil',
+        'Wild Forest Honey',
+        'Organic and Natural Ingredients',
+        'Sustainably Sourced'
+      ],
+      specifications: {
+        'Contents': 'A2 Ghee (500g), Khapli Atta (500g), Mustard Oil (250ml), Wild Forest Honey (500g)',
+        'Shelf Life': '12 months',
+        'Storage': 'Store in a cool, dry place',
+        'Origin': 'Made in India'
+      },
+    },
   };
 
   const product = products[productId] || products['a2-ghee'];
@@ -204,11 +232,19 @@ const ProductDetail = () => {
   }, []);
 
   const handleAddToCart = () => {
+    if (productId === 'build-your-own-box') {
+      window.location.href = '/build-your-own-box';
+      return;
+    }
     // Add to cart logic
     console.log(`Added ${quantity} ${product.name} to cart`);
   };
 
   const handleBuyNow = () => {
+    if (productId === 'build-your-own-box') {
+      window.location.href = '/build-your-own-box';
+      return;
+    }
     // Buy now logic
     console.log(`Buying ${quantity} ${product.name}`);
   };
@@ -277,10 +313,10 @@ const ProductDetail = () => {
             {/* Price */}
             <div className="flex items-center gap-4">
               <span className="text-3xl font-bold text-amber-500">₹{product.price}</span>
-              <span className="text-xl text-gray-400 line-through">₹{product.originalPrice}</span>
-              <span className="bg-red-600 text-white px-2 py-1 rounded text-sm">
+              {product.price!=product.originalPrice && <span className="text-xl text-gray-400 line-through">₹{product.originalPrice}</span>}
+              {product.price!=product.originalPrice && <span className="bg-red-600 text-white px-2 py-1 rounded text-sm">
                 {Math.round((1 - product.price/product.originalPrice) * 100)}% OFF
-              </span>
+              </span>}
             </div>
 
             {/* Description */}

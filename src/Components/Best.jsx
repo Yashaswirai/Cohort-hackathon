@@ -3,7 +3,6 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import { useState, useRef } from "react";
-
 const Best = () => {
   const [isHovered, setIsHovered] = useState(false);
   const swiperRef = useRef(null);
@@ -24,53 +23,47 @@ const Best = () => {
 
   const allItems = [
     {
-      img: "https://www.rosierfoods.com/cdn/shop/files/Untitled_Artwork61.jpg?v=1749285565",
-      title: "Wireless Headphones",
-      price: 99.99,
-      quantity: 15,
+      id: 'a2-ghee',
+      title: 'Premium A2 Ghee',
+      price: 899,
+      img: 'https://www.rosierfoods.com/cdn/shop/files/Untitled_Artwork60.jpg?v=1749285565',
+      quantity: 10
     },
     {
-      img: "https://www.rosierfoods.com/cdn/shop/files/Website_2kg.jpg?v=1750338216",
-      title: "Smart Watch",
-      price: 149.99,
-      quantity: 8,
+      id: 'better-bars',
+      title: 'Nutritious Better Bars',
+      price: 299,
+      img: 'https://www.rosierfoods.com/cdn/shop/files/1_Cocoa_Almond.jpg?v=1743769781',
+      quantity: 20
     },
     {
-      img: "https://www.rosierfoods.com/cdn/shop/files/newoldhoneypostforlisting.jpg?v=1743060337",
-      title: "Smart Watch",
-      price: 149.99,
-      quantity: 8,
+      id: 'khapli-atta',
+      title: 'Khapli (Emmer) Wheat Atta',
+      price: 469,
+      img: 'https://www.rosierfoods.com/cdn/shop/files/Bestseller.jpg?v=1743589042',
+      quantity: 15
     },
     {
-      img: "https://www.rosierfoods.com/cdn/shop/files/2_d81dc980-086e-4dba-a716-52444f13ae45.jpg?v=1746730339",
-      title: "Bluetooth Speaker",
-      price: 59.99,
-      quantity: 20,
+      id: 'stone-pressed-oils',
+      title: 'Stone Pressed Black Mustard Oil',
+      price: 390,
+      img: 'https://www.rosierfoods.com/cdn/shop/files/2_d81dc980-086e-4dba-a716-52444f13ae45.jpg?v=1746730339',
+      quantity: 25
     },
     {
-      img: "https://www.rosierfoods.com/cdn/shop/files/Untitled_Artwork61.jpg?v=1749285565",
-      title: "Wireless Headphones",
-      price: 99.99,
-      quantity: 15,
+      id: 'raw-honey',
+      title: 'Wild Forest Honey',
+      price: 499,
+      img: 'https://www.rosierfoods.com/cdn/shop/files/honey500front.jpg?v=1743060344',
+      quantity: 30
     },
     {
-      img: "https://www.rosierfoods.com/cdn/shop/files/Website_2kg.jpg?v=1750338216",
-      title: "Smart Watch",
-      price: 149.99,
-      quantity: 8,
-    },
-    {
-      img: "https://www.rosierfoods.com/cdn/shop/files/newoldhoneypostforlisting.jpg?v=1743060337",
-      title: "Smart Watch",
-      price: 149.99,
-      quantity: 8,
-    },
-    {
-      img: "https://www.rosierfoods.com/cdn/shop/files/2_d81dc980-086e-4dba-a716-52444f13ae45.jpg?v=1746730339",
-      title: "Bluetooth Speaker",
-      price: 59.99,
-      quantity: 20,
-    },
+      id: 'pooja-essentials',
+      title: 'Rosier Havan Cups – Bakhoor',
+      price: 290,
+      img: 'https://www.rosierfoods.com/cdn/shop/files/BakhoorCupFront.jpg?v=174315143',
+      quantity: 50
+    }
   ];
 
   return (
@@ -159,11 +152,11 @@ const Best = () => {
 
                 <div>
                   <h2 className="text-lg sm:text-xl font-semibold pb-1 overflow-hidden">
-                    {item.title}
+                      {item.title.split(' ').slice(0, 3).join(' ')}{item.title.split(' ').length > 3 ? '...' : ''}
                   </h2>
                   <div className="flex justify-between items-center">
                     <p className="text-yellow-500 font-bold text-lg sm:text-xl">
-                      ${item.price.toFixed(2)}
+                      ₹ {item.price.toFixed(2)}
                     </p>
                     <p className="text-gray-400 text-sm">
                       Stock: {item.quantity}
@@ -178,7 +171,7 @@ const Best = () => {
                       Add to Cart
                     </Link>
                     <Link
-                      to="/shop"
+                      to={`/collection/${item.id}`}
                       className="flex-1 border border-yellow-500 hover:bg-yellow-500 hover:text-black text-yellow-500 px-3 sm:px-4 py-2 rounded-full font-semibold text-center text-sm sm:text-base transition-all duration-200"
                     >
                       View Details

@@ -8,7 +8,7 @@ const DEFAULT_SPOTLIGHT_RADIUS = 300;
 const DEFAULT_GLOW_COLOR = "184, 138, 31";
 const MOBILE_BREAKPOINT = 768;
 
-const cardData = [
+export const cardData = [
   {
     title: "GHEE",
     img: "https://www.rosierfoods.com/cdn/shop/files/Untitled_Artwork64.jpg?v=1749285565&width=823",
@@ -743,7 +743,7 @@ const MagicBento = ({
               return (
                 <Link
                   key={index}
-                  to={`/collection/${card.title
+                  to={index==4?"/build-your-own-box":`/collection/${card.title
                     .toLowerCase()
                     .split(" ")
                     .join("-")}`}
@@ -767,7 +767,7 @@ const MagicBento = ({
             return (
               <Link
                 key={index}
-                to={`/collection/${card.title
+                to={index==4?"/build-your-own-box":`/collection/${card.title
                   .toLowerCase()
                   .split(" ")
                   .join("-")}`}

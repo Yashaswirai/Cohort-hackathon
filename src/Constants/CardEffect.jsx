@@ -1,4 +1,4 @@
-import { cn } from "../utils/CardEffect";
+import { cn } from "../utils/cn";
 
 import React, {
   createContext,

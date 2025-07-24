@@ -1,4 +1,4 @@
-import { cn } from "../utils/TypeWritterEffect.js";
+import { cn } from "../utils/cn";
 import { motion } from "motion/react";
 
 

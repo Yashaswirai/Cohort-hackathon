@@ -53,7 +53,7 @@ const Contact = () => {
                                             message: 'Name must be at least 2 characters'
                                         }
                                     })}
-                                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition bg-black text-white ${
+                                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent outline-none transition bg-black text-white ${
                                         errors.name ? 'border-red-500' : 'border-gray-600'
                                     }`}
                                 />
@@ -76,7 +76,7 @@ const Contact = () => {
                                             message: 'Please enter a valid email address'
                                         }
                                     })}
-                                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition bg-black text-white ${
+                                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent outline-none transition bg-black text-white ${
                                         errors.email ? 'border-red-500' : 'border-gray-600'
                                     }`}
                                 />
@@ -99,7 +99,7 @@ const Contact = () => {
                                             message: 'Subject must be at least 5 characters'
                                         }
                                     })}
-                                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition bg-black text-white ${
+                                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent outline-none transition bg-black text-white ${
                                         errors.subject ? 'border-red-500' : 'border-gray-600'
                                     }`}
                                 />
@@ -122,7 +122,7 @@ const Contact = () => {
                                             message: 'Message must be at least 10 characters'
                                         }
                                     })}
-                                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition resize-none bg-black text-white ${
+                                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent outline-none transition resize-none bg-black text-white ${
                                         errors.message ? 'border-red-500' : 'border-gray-600'
                                     }`}
                                 ></textarea>

@@ -80,7 +80,7 @@ const LoginRegister = () => {
 
   return (
     <div className="w-full h-screen bg-black flex items-center justify-center">
-      <BackgroundGradientAnimation className={"relative w-full h-full flex items-center justify-center"} position={"absolute"}>
+      <BackgroundGradientAnimation className={"relative w-full h-full flex items-center justify-center"}>
         <div
           ref={containerRef}
           className="bg-gray-900 p-8 rounded-lg shadow-2xl w-1/3 border border-gray-700 relative z-10"

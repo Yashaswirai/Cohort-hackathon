@@ -6,6 +6,8 @@ import Community from "../Pages/Community.jsx";
 import PageNotFound from "../Pages/PageNotFound.jsx";
 import Contact from "../Pages/Contact.jsx";
 import LoginRegister from "../Pages/LoginRegister.jsx";
+import ProductDetail from "../Pages/ProductDetail.jsx";
+
 const MainRoute = () => {
   return (
     <Routes>
@@ -15,6 +17,7 @@ const MainRoute = () => {
       <Route path="/community" element={<Community />} />
       <Route path="/contactUs" element={<Contact />} />
       <Route path="/loginRegister" element={<LoginRegister />} />
+      <Route path="/collection/:productId" element={<ProductDetail />} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
   );

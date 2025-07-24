@@ -24,17 +24,15 @@ const Loader = () => {
           <mask id="viMask">
             <rect width="100%" height="100%" fill="black" />
             <g className="vi-mask-group ">
-              <text
+              <image
                 x="50%"
                 y="50%"
-                fontSize="50"
-                textAnchor="middle"
+                width="100"
+                height="100"
+                href="https://cdn.shopify.com/s/files/1/0653/2605/5654/files/logo_1_1_bb8fb2d6-681f-4ca4-aad5-5dbc7e581ce4.png?v=1710946898"
                 fill="white"
-                dominantBaseline="middle"
-                fontFamily="satoshi"
-              >
-                ROSIER
-              </text>
+                transform="translate(-50, -50)"
+              />
             </g>
           </mask>
         </defs>

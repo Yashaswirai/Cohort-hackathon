@@ -5,6 +5,7 @@ import Shop from "../Pages/shop.jsx";
 import Community from "../Pages/Community.jsx";
 import PageNotFound from "../Pages/PageNotFound.jsx";
 import Contact from "../Pages/Contact.jsx";
+import LoginRegister from "../Pages/LoginRegister.jsx";
 const MainRoute = () => {
   return (
     <Routes>
@@ -13,6 +14,7 @@ const MainRoute = () => {
       <Route path="/shop" element={<Shop />} />
       <Route path="/community" element={<Community />} />
       <Route path="/contactUs" element={<Contact />} />
+      <Route path="/loginRegister" element={<LoginRegister />} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
   );

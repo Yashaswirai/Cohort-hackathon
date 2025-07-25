@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { useCart } from '../context/CartContext';
 import "swiper/css";
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import { useState, useRef } from "react";
@@ -20,7 +21,6 @@ const Best = () => {
       swiperRef.current.autoplay.start();
     }
   };
-
   const allItems = [
     {
       id: 'a2-ghee',
@@ -164,12 +164,6 @@ const Best = () => {
                   </div>
 
                   <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 pt-2">
-                    <Link
-                      to="/cart"
-                      className="flex items-center justify-center px-2 bg-yellow-600 hover:bg-yellow-700 text-yellow-100 rounded-full font-semibold text-center text-sm sm:text-base transition-colors duration-200"
-                    >
-                      Add to Cart
-                    </Link>
                     <Link
                       to={`/collection/${item.id}`}
                       className="flex-1 border border-yellow-500 hover:bg-yellow-500 hover:text-black text-yellow-500 px-3 sm:px-4 py-2 rounded-full font-semibold text-center text-sm sm:text-base transition-all duration-200"

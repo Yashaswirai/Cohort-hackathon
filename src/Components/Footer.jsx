@@ -66,7 +66,7 @@ const Footer = () => {
           </h3>
           <Link
             className="hover:text-white text-white/80 font-black transition-colors"
-            to="/our-story"
+            to="/ourStory"
           >
             Our Story
           </Link>
@@ -141,19 +141,19 @@ const Footer = () => {
           <h3 className="font-semibold text-amber-300 text-xl">Follow Us</h3>
           <Link
             className="hover:text-white text-white/80 font-black transition-colors"
-            to="/facebook"
+            to="https://www.facebook.com/rosierfoods/"
           >
             <i className="ri-facebook-circle-fill"></i> Facebook
           </Link>
           <Link
             className="hover:text-white text-white/80 font-black transition-colors"
-            to="/instagram"
+            to="https://www.instagram.com/rosier.foods/"
           >
             <i className="ri-instagram-fill"></i> Instagram
           </Link>
           <Link
             className="hover:text-white text-white/80 font-black transition-colors"
-            to="/youtube"
+            to="https://www.youtube.com/channel/UCq82cLzzIqllEOsdpb_2lxg"
           >
             <i className="ri-youtube-fill"></i> Youtube
           </Link>

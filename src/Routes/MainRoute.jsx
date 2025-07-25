@@ -8,6 +8,7 @@ import Contact from "../Pages/Contact.jsx";
 import LoginRegister from "../Pages/LoginRegister.jsx";
 import ProductDetail from "../Pages/ProductDetail.jsx";
 import BuildYourOwnBox from "../Pages/BuildYourOwnBox.jsx";
+import Cart from "../Pages/Cart.jsx";
 
 const MainRoute = () => {
   return (
@@ -20,6 +21,7 @@ const MainRoute = () => {
       <Route path="/loginRegister" element={<LoginRegister />} />
       <Route path="/collection/:productId" element={<ProductDetail />} />
       <Route path="/build-your-own-box" element={<BuildYourOwnBox />} />
+      <Route path="/cart" element={<Cart />} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
   );

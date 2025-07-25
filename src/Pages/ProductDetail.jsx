@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import Footer from '../Components/Footer';
+import { useCart } from '../context/CartContext';
 
 const ProductDetail = () => {
   const { productId } = useParams();
@@ -10,6 +11,7 @@ const ProductDetail = () => {
   const [quantity, setQuantity] = useState(1);
   const imageRef = useRef(null);
   const detailsRef = useRef(null);
+  const { addToCart } = useCart();
 
   // Product data - in a real app, this would come from an API
   const products = {
@@ -236,8 +238,25 @@ const ProductDetail = () => {
       window.location.href = '/build-your-own-box';
       return;
     }
-    // Add to cart logic
-    console.log(`Added ${quantity} ${product.name} to cart`);
+    
+    const cartItem = {
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      image: product.images[0],
+      category: 'Organic Product'
+    };
+    
+    addToCart(cartItem, quantity);
+    
+    // Animation feedback
+    gsap.to('.add-to-cart-btn', {
+      scale: 1.1,
+      duration: 0.2,
+      yoyo: true,
+      repeat: 1,
+      ease: "power2.out"
+    });
   };
 
   const handleBuyNow = () => {
@@ -359,7 +378,7 @@ const ProductDetail = () => {
             <div className="flex gap-4">
               <button 
                 onClick={handleAddToCart}
-                className="flex-1 bg-amber-600 hover:bg-amber-700 text-white py-3 px-6 rounded-lg font-semibold transition-colors"
+                className="add-to-cart-btn flex-1 bg-amber-600 hover:bg-amber-700 text-white py-3 px-6 rounded-lg font-semibold transition-colors"
               >
                 Add to Cart
               </button>

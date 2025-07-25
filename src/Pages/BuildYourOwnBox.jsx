@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import Footer from '../Components/Footer';
+import { useCart } from '../context/CartContext';
 
 const BuildYourOwnBox = () => {
   const [selectedProducts, setSelectedProducts] = useState([]);
@@ -202,8 +203,22 @@ useGSAP(() => {
     });
   };
 
+  const { addToCart } = useCart();
+
   const handleCheckout = () => {
     if (selectedProducts.length === 0) return;
+    
+    // Create a bundle item for the cart
+    const bundleItem = {
+      id: `custom-box-${Date.now()}`,
+      name: `Custom ${boxSizes[boxSize].name}`,
+      price: totalPrice,
+      image: selectedProducts[0]?.image,
+      category: 'Custom Bundle',
+      bundleContents: selectedProducts.map(p => p.name).join(', ')
+    };
+    
+    addToCart(bundleItem, 1);
     
     gsap.to(summaryRef.current, {
       scale: 1.1,
@@ -213,7 +228,11 @@ useGSAP(() => {
       ease: "power2.out"
     });
     
-    console.log('Checkout:', { boxSize, selectedProducts, totalPrice });
+    // Reset the builder after adding to cart
+    setTimeout(() => {
+      setSelectedProducts([]);
+      setBoxSize('medium');
+    }, 1000);
   };
 
   return (

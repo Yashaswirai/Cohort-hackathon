@@ -4,6 +4,7 @@ import MainRoute from "./Routes/MainRoute.jsx";
 import Loader from "./Components/Loader.jsx";
 import LocomotiveScroll from "locomotive-scroll";
 import { useLocation } from "react-router-dom";
+import { CartProvider } from "./context/CartContext.jsx";
 
 const App = () => {
   const scrollRef = useRef(null);
@@ -32,11 +33,13 @@ const App = () => {
 
   return (
     <>
-      <div className="w-full h-screen font-[satoshi]" data-scroll-container>
-        <Loader />
-        <NavBar />
-        <MainRoute />
-      </div>
+      <CartProvider>
+        <div className="w-full h-screen font-[satoshi]" data-scroll-container>
+          <Loader />
+          <NavBar />
+          <MainRoute />
+        </div>
+      </CartProvider>
     </>
   );
 };
